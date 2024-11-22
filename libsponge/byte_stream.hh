@@ -16,6 +16,14 @@
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
+    
+    std::deque<char> _buffer;
+    size_t _capacity_size;
+    size_t _written_count;
+    size_t _read_count;
+    bool _end_input;
+
+    // private members added -------------------------
 
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
@@ -53,11 +61,7 @@ class ByteStream {
 
     //! Read (i.e., copy and then pop) the next "len" bytes of the stream
     //! \returns a vector of bytes read
-    std::string read(const size_t len) {
-        const auto ret = peek_output(len);
-        pop_output(len);
-        return ret;
-    }
+    std::string read(const size_t len);
 
     //! \returns `true` if the stream input has ended
     bool input_ended() const;
